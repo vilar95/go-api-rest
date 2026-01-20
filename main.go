@@ -14,6 +14,6 @@ func main() {
 		{ID: 4, Name: "Ada Lovelace", History: "Matemática inglesa, considerada a primeira programadora de computadores."},
 		{ID: 5, Name: "Nikola Tesla", History: "Inventor e engenheiro elétrico sérvio-americano, conhecido por suas contribuições ao desenvolvimento da corrente alternada."}}
 
-	fmt.Println("Servidor iniciado na porta 8000")
+	fmt.Println("Servidor iniciado na porta http://localhost:8000")
 	routes.HandleRequest()
 }
