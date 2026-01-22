@@ -1,0 +1,36 @@
+# Binários
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output do go build
+/bin/
+/build/
+*.exe
+api
+go-api-rest
+
+# Dependências Go
+/vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Arquivos de ambiente
+.env
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

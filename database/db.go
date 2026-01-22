@@ -1,21 +1,36 @@
 package database
 
 import (
-	"log"
+	"go-api-rest/pkg/logger"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	gormLogger "gorm.io/gorm/logger"
 )
 
-var (
-	DB  *gorm.DB
-	err error
-)
+// Database representa a conexão com o banco de dados
+type Database struct {
+	DB *gorm.DB
+}
 
-func ConnectDatabase() {
-	dsn := "host=localhost user=vilar password=vilar123 dbname=postgres port=5432 sslmode=disable"
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+// NewDatabase cria uma nova conexão com o banco de dados
+func NewDatabase(dsn string) (*Database, error) {
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: gormLogger.Default.LogMode(gormLogger.Silent),
+	})
 	if err != nil {
-		log.Panic("Falha ao conectar com o banco de dados!")
+		return nil, err
 	}
+
+	logger.Info("Conexão com banco de dados estabelecida com sucesso")
+	return &Database{DB: db}, nil
+}
+
+// Close fecha a conexão com o banco de dados
+func (d *Database) Close() error {
+	sqlDB, err := d.DB.DB()
+	if err != nil {
+		return err
+	}
+	return sqlDB.Close()
 }
